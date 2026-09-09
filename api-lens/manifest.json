@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "API Lens",
+  "version": "1.1.0",
+  "description": "REST API tester with status, response headers, pretty JSON, raw body, table view, history, copy and download.",
+  "permissions": ["storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "action": { "default_popup": "popup.html", "default_title": "API Lens" }
+}

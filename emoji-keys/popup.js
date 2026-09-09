@@ -1,0 +1,5 @@
+const defaultMap={a:"🍎",b:"🍌",c:"🐱",d:"🐶",e:"🐘",f:"🦊",g:"🍇",h:"🏠",i:"🍦",j:"🧃",k:"🥝",l:"🦁",m:"🌙",n:"🥜",o:"🍊",p:"🐧",q:"👑",r:"🌈",s:"⭐",t:"🐯",u:"☂️",v:"🎻",w:"🐋",x:"❌",y:"🪀",z:"🦓"};
+const els={mode:document.getElementById("mode"),size:document.getElementById("size"),duration:document.getElementById("duration"),apply:document.getElementById("apply"),grid:document.getElementById("grid")};
+els.grid.innerHTML=Object.entries(defaultMap).map(([k,v])=>`<span><b>${k.toUpperCase()}</b> ${v}</span>`).join("");
+chrome.storage.local.get({emojiKeys:{mode:"off",size:42,duration:700,map:defaultMap}}).then(({emojiKeys})=>{els.mode.value=emojiKeys.mode||"off";els.size.value=emojiKeys.size||42;els.duration.value=emojiKeys.duration||700});
+els.apply.onclick=async()=>{const emojiKeys={mode:els.mode.value,size:Math.max(24,Math.min(96,+els.size.value||42)),duration:Math.max(250,Math.min(1800,+els.duration.value||700)),map:defaultMap};await chrome.storage.local.set({emojiKeys});els.apply.textContent="Saved ✓";setTimeout(()=>els.apply.textContent="Apply",800)};

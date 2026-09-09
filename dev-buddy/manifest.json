@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Dev Buddy",
+  "version": "1.1.0",
+  "description": "F12-like floating inspector for DOM, CSS, page metadata, storage, links, images, and runtime errors.",
+  "permissions": ["storage"],
+  "action": { "default_title": "Toggle Dev Buddy" },
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["content.js"],
+    "run_at": "document_start"
+  }]
+}

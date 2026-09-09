@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Weather Floater",
+  "version": "1.1.0",
+  "description": "Draggable live weather widget with current conditions and a 7-day forecast using Open-Meteo.",
+  "permissions": ["storage", "geolocation"],
+  "host_permissions": [
+    "https://api.open-meteo.com/*",
+    "https://geocoding-api.open-meteo.com/*"
+  ],
+  "action": { "default_title": "Toggle Weather Floater" },
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["content.js"],
+    "run_at": "document_idle"
+  }]
+}

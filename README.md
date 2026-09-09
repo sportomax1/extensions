@@ -1,251 +1,75 @@
 # Browser Extensions
 
-A collection of small browser extensions for productivity, time awareness, and Board Game Lab / BoardGameGeek tools.
+A collection of independent Chrome/Chromium Manifest V3 extensions. Load each extension's own folder in `chrome://extensions`; do **not** load the repository root.
 
-Each extension lives in its own folder and can be loaded independently. You do **not** load the repository root as an extension; load the specific extension folder you want to use.
+## Current extensions
 
-## Extensions
-
-| Folder | Extension | What it does |
+| Folder | Extension | Purpose |
 |---|---|---|
-| [`minute-flash-clock/`](./minute-flash-clock/) | **Minute Flash Clock** | Flashes the current digital time at the start of every minute, with stronger visual treatment for 5-, 15-, 30-, and 60-minute marks. |
-| [`browser-dictation/`](./browser-dictation/) | **Browser Dictation** | Converts speech to text and inserts it at the last focused text field/caret on a webpage. |
-| [`board-game-lab-ticker/`](./board-game-lab-ticker/) | **Board Game Lab Ticker** | Shows a bottom ticker of BoardGameGeek collection games using Board Game Lab's BGG helper endpoint. |
+| [`minute-flash-clock/`](./minute-flash-clock/) | **Minute Flash Clock** | Flashes the time at every minute with stronger 5/15/30/60-minute tiers. |
+| [`browser-dictation/`](./browser-dictation/) | **Browser Dictation** | Speech-to-text into the last focused editable field. |
+| [`board-game-lab-ticker/`](./board-game-lab-ticker/) | **Board Game Lab Ticker** | BoardGameGeek collection ticker powered by Board Game Lab's helper endpoint. |
+| [`weather-floater/`](./weather-floater/) | **Weather Floater** | Draggable current-weather + 7-day forecast widget with search/current location. |
+| [`dev-buddy/`](./dev-buddy/) | **Dev Buddy** | F12-like on-page element/CSS/page/storage/error inspector. |
+| [`api-lens/`](./api-lens/) | **API Lens** | REST tester with pretty JSON, raw body, response headers, table view, history and downloads. |
+| [`emoji-keys/`](./emoji-keys/) | **Emoji Keys** | A-Z emoji animations and optional letter-to-emoji replacement while typing. |
 
----
-
-# Install an extension in Chrome
-
-These are currently set up as **unpacked Chrome Manifest V3 extensions**.
+## Install
 
 1. Clone or download this repository.
-2. Open Chrome.
-3. Go to:
-
-   ```text
-   chrome://extensions
-   ```
-
-4. Turn on **Developer mode** in the upper-right corner.
-5. Click **Load unpacked**.
-6. Select the folder for the extension you want, for example:
-
-   ```text
-   extensions/minute-flash-clock
-   ```
-
-7. Repeat **Load unpacked** for any additional extension folders you want enabled.
-8. Refresh webpages that were already open before the extension was installed.
-
-## Updating after a Git pull
-
-When files change in GitHub:
-
-1. Pull the newest repository version.
 2. Open `chrome://extensions`.
-3. Find the extension.
-4. Click **Reload** on its extension card.
-5. Refresh the webpage you are testing.
+3. Enable **Developer mode**.
+4. Click **Load unpacked**.
+5. Select one extension folder, such as `weather-floater`.
+6. Repeat for each extension you want enabled.
+7. Refresh webpages that were already open.
 
-You normally do **not** need to remove and reinstall the extension after each update.
+## Updating after `git pull`
 
----
+1. Pull the latest `main` branch.
+2. Open `chrome://extensions`.
+3. Click **Reload** on each changed extension.
+4. Refresh the webpage being tested.
 
-# Minute Flash Clock
+## Extension notes
 
-Folder: [`minute-flash-clock/`](./minute-flash-clock/)
+### Minute Flash Clock
+Minute classification uses the strongest matching tier: normal minute; 5-minute (`:05`, `:10`, `:20`, `:25`, `:35`, `:40`, `:50`, `:55`); quarter-hour (`:15`, `:45`); half-hour (`:30`); hour (`:00`). Settings include 12/24-hour format, duration, animation, dimming, seconds, chime and per-tier enable/disable.
 
-Flashes a large digital clock at the exact beginning of each new minute.
+### Browser Dictation
+Click an editable field, then use the popup or keyboard shortcut. Default shortcuts are `Alt+Shift+D` on Windows/Linux/ChromeOS and `Command+Shift+D` on macOS. Supports standard inputs, textareas and many `contenteditable` editors, plus voice punctuation commands.
 
-## Minute classifications
+### Board Game Lab Ticker
+Shows BGG collection thumbnails and stats in a bottom overlay. Modes include Most Played, Least Played, Highest Rated, Unplayed and Random. The overlay approach is intentional because universally resizing/reparenting arbitrary websites is unreliable.
 
-The strongest matching tier wins:
+### Weather Floater
+Toolbar click toggles a draggable weather card. Search by place/ZIP or use current location. Shows current temperature, feels-like, humidity, wind, precipitation probability and a seven-day high/low forecast. Uses Open-Meteo without an API key and remembers its last location, units and position.
 
-| Minute mark | Classification |
-|---|---|
-| Every unlisted minute | Normal minute |
-| `:05, :10, :20, :25, :35, :40, :50, :55` | 5-minute |
-| `:15, :45` | Quarter hour |
-| `:30` | Half hour |
-| `:00` | Top of hour |
+### Dev Buddy
+A lightweight F12-like overlay. `Inspect` highlights an element and reports selector, attributes, size, computed CSS and text. Other tabs show page metadata, storage/cookies, links, images and captured page errors. It is not a replacement for Chrome DevTools: source debugging, breakpoints, privileged internals and the full network waterfall still require DevTools.
 
-Higher tiers are progressively more noticeable.
+### API Lens
+Enter a URL and choose GET/POST/PUT/PATCH/DELETE/HEAD. Add headers as JSON and an optional request body. Results include HTTP status, timing, response size/type, Pretty JSON, exact Raw body, Response Headers and a table view for JSON. Responses can be copied/downloaded, and requests can be saved or reloaded from recent history.
 
-## Main settings
+### Emoji Keys
+Modes are Off, Animate only, Replace + Animate, and Replace only. A-Z have emoji mappings; Ctrl/Cmd/Alt shortcuts are ignored. Popup settings control emoji size and animation duration.
 
-- Enable / disable the extension
-- 12-hour or 24-hour time
-- Flash duration
-- Zoom, slide, flip, or pulse animation
-- Optional page dimming
-- Optional seconds
-- Optional tiered chime
-- Enable / disable individual minute tiers
-- Test any tier immediately
+## Common Chrome limitations
 
-## Example
+Content scripts cannot run on protected browser pages such as `chrome://...`, the Chrome Web Store and some browser-owned screens. Highly customized editors can also intercept input before an extension can manipulate it. After installing or reloading an extension, refresh existing tabs before testing.
 
-```text
-2:37:00  → Normal flash
-2:40:00  → 5-minute flash
-2:45:00  → Quarter-hour flash
-3:00:00  → Hourly flash
-```
-
-See [`minute-flash-clock/README.md`](./minute-flash-clock/README.md) for more details.
-
----
-
-# Browser Dictation
-
-Folder: [`browser-dictation/`](./browser-dictation/)
-
-Lets you dictate into most normal webpage text fields instead of typing.
-
-## Basic use
-
-1. Click inside the text field where you want the text inserted.
-2. Start dictation using the keyboard shortcut or extension popup.
-3. Speak normally.
-4. Final recognized speech is inserted at the remembered caret position.
-5. Stop dictation with the same shortcut or popup button.
-
-## Default keyboard shortcut
-
-| Platform | Shortcut |
-|---|---|
-| Windows / Linux / ChromeOS | `Alt + Shift + D` |
-| macOS | `Command + Shift + D` |
-
-Using the keyboard shortcut is generally best because opening the popup can move browser focus away from the field you were editing.
-
-## Supported editor types
-
-- Standard text inputs
-- Search boxes
-- Textareas
-- Most `contenteditable` editors
-
-Highly customized JavaScript editors may require site-specific support.
-
-## Voice commands
-
-When voice punctuation commands are enabled, standalone phrases include:
-
-- `new line`
-- `new paragraph`
-- `comma`
-- `period`
-- `full stop`
-- `question mark`
-- `exclamation point`
-- `colon`
-- `semicolon`
-
-## Other features
-
-- Continuous listening
-- Language selector
-- Optional automatic spaces
-- Floating listening / transcript indicator
-- Toolbar `ON` badge while dictation is active
-- Chrome-synced settings
-
-See [`browser-dictation/README.md`](./browser-dictation/README.md) for more details.
-
----
-
-# Board Game Lab Ticker
-
-Folder: [`board-game-lab-ticker/`](./board-game-lab-ticker/)
-
-Adds a bottom overlay ticker containing games from a BoardGameGeek collection.
-
-It uses the existing Board Game Lab BGG helper endpoint with collection data.
-
-## Main features
-
-- Board-game thumbnail ticker
-- Most Played
-- Least Played
-- Highest Rated
-- Unplayed
-- Random
-- Play counts
-- Ratings
-- BGG rank
-- Adjustable number of games
-- Adjustable ticker speed
-- Hover to pause
-- Click a game to open BoardGameGeek
-- Persistent settings
-- Manual refresh
-- Show / hide controls
-
-The ticker is intentionally implemented as an **overlay** rather than attempting to resize or rewrite arbitrary webpages.
-
-See [`board-game-lab-ticker/README.md`](./board-game-lab-ticker/README.md) for more details.
-
----
-
-# Repository structure
+## Repository structure
 
 ```text
 extensions/
 ├── README.md
+├── api-lens/
 ├── board-game-lab-ticker/
-│   ├── manifest.json
-│   ├── ...
-│   └── README.md
 ├── browser-dictation/
-│   ├── manifest.json
-│   ├── background.js
-│   ├── content.js
-│   ├── popup.html
-│   ├── popup.js
-│   └── README.md
-└── minute-flash-clock/
-    ├── manifest.json
-    ├── content.js
-    ├── popup.html
-    ├── popup.js
-    └── README.md
+├── dev-buddy/
+├── emoji-keys/
+├── minute-flash-clock/
+└── weather-floater/
 ```
 
-Each folder should remain self-contained so one extension can be changed or reloaded without affecting the others.
-
----
-
-# Common limitations
-
-Chrome prevents normal extensions from injecting content scripts into certain protected pages, including:
-
-- `chrome://...` pages
-- The Chrome Web Store
-- Some built-in browser pages
-
-When testing an extension, use a normal webpage such as a regular website or local development page.
-
-If an extension was just installed or reloaded, refresh the webpage before assuming the extension is not working.
-
----
-
-# Development workflow
-
-A simple workflow for changes is:
-
-```text
-Edit extension files
-        ↓
-Commit / push to main
-        ↓
-Pull latest files on the computer running Chrome
-        ↓
-chrome://extensions
-        ↓
-Reload the affected extension
-        ↓
-Refresh the test webpage
-```
-
-Because each project is isolated in its own directory, future browser extensions can be added as additional top-level folders without changing the existing ones.
+Each extension is self-contained so it can be enabled, changed and reloaded independently.
