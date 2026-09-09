@@ -1,9 +1,14 @@
 {
   "manifest_version": 3,
   "name": "API Lens",
-  "version": "1.1.0",
-  "description": "REST API tester with status, response headers, pretty JSON, raw body, table view, history, copy and download.",
-  "permissions": ["storage"],
+  "version": "2.0.0",
+  "description": "Postman-like REST tester plus current-page fetch/XHR/resource sniffer with raw bodies, headers, timing, replay, and cURL export.",
+  "permissions": ["storage", "activeTab"],
   "host_permissions": ["http://*/*", "https://*/*"],
-  "action": { "default_popup": "popup.html", "default_title": "API Lens" }
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "API Lens" },
+  "content_scripts": [
+    {"matches":["http://*/*","https://*/*"],"js":["page-sniffer.js"],"run_at":"document_start","world":"MAIN"},
+    {"matches":["http://*/*","https://*/*"],"js":["bridge.js"],"run_at":"document_start"}
+  ]
 }

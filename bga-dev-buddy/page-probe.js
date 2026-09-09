@@ -1,0 +1,5 @@
+(()=>{
+ const safe=(v,depth=0)=>{if(depth>2)return'[object]';if(v==null||['string','number','boolean'].includes(typeof v))return v;if(Array.isArray(v))return v.slice(0,20).map(x=>safe(x,depth+1));if(typeof v==='object'){const out={};for(const k of Object.keys(v).slice(0,40)){try{const x=v[k];if(typeof x!=='function')out[k]=safe(x,depth+1)}catch{}}return out}return String(v)};
+ function probe(){const names=['g_gamethemeurl','g_themeurl','g_replayFrom','g_archive_mode','gameui'];const globals={};for(const n of names){try{if(window[n]!==undefined){if(n==='gameui'){const g=window[n];globals.gameui={game_name:g?.game_name,table_id:g?.table_id,player_id:g?.player_id,isSpectator:g?.isSpectator,notifqueue:!!g?.notifqueue,gamedatas:safe(g?.gamedatas)}}else globals[n]=safe(window[n])}}catch{}}window.postMessage({source:'bga-dev-buddy-probe',type:'BGA_GLOBALS',globals},'*')}
+ window.addEventListener('message',e=>{if(e.source===window&&e.data?.source==='bga-dev-buddy-control'&&e.data.type==='PROBE')probe()});setTimeout(probe,1200);
+})();

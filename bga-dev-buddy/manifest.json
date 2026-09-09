@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "BGA Dev Buddy",
+  "version": "1.0.0",
+  "description": "Board Game Arena development helper for detecting project/table/player context, assets, URLs, and common Studio shortcuts.",
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": ["https://*.boardgamearena.com/*"],
+  "action": { "default_popup": "popup.html", "default_title": "BGA Dev Buddy" },
+  "content_scripts": [
+    {"matches":["https://*.boardgamearena.com/*"],"js":["page-probe.js"],"run_at":"document_start","world":"MAIN"},
+    {"matches":["https://*.boardgamearena.com/*"],"js":["content.js"],"run_at":"document_start"}
+  ]
+}

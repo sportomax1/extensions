@@ -1,0 +1,5 @@
+const MAX=300, queues=new Map();
+const key=id=>`apiLensCapture:${id}`;
+function enqueue(tabId,fn){const p=(queues.get(tabId)||Promise.resolve()).then(fn,fn);const tracked=p.finally(()=>{if(queues.get(tabId)===tracked)queues.delete(tabId)});queues.set(tabId,tracked);return tracked}
+async function append(tabId,entry){return enqueue(tabId,async()=>{const k=key(tabId),r=await chrome.storage.session.get(k),arr=r[k]||[];arr.unshift({...entry,id:entry.id||crypto.randomUUID(),capturedAt:entry.capturedAt||Date.now()});await chrome.storage.session.set({[k]:arr.slice(0,MAX)})})}
+chrome.runtime.onMessage.addListener((m,sender,send)=>{const tabId=sender.tab?.id??m.tabId;if(m.type==='API_LENS_SNIFF_ENTRY'&&sender.tab?.id!=null){append(sender.tab.id,m.entry);return false}if(m.type==='API_LENS_GET_CAPTURED'){chrome.storage.session.get(key(tabId)).then(r=>send({ok:true,entries:r[key(tabId)]||[]}));return true}if(m.type==='API_LENS_CLEAR_CAPTURED'){chrome.storage.session.remove(key(tabId)).then(()=>send({ok:true}));return true}return false});

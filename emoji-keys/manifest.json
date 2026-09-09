@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Emoji Keys",
-  "version": "1.1.0",
-  "description": "Animated A-Z emoji keyboard effects and optional emoji replacement for webpage text fields.",
+  "version": "2.0.0",
+  "description": "Custom A-Z emoji mappings with typing particles, confetti, trails, sounds, streaks, and an optional keyboard heatmap.",
   "permissions": ["storage"],
   "action": { "default_popup": "popup.html", "default_title": "Emoji Keys" },
   "content_scripts": [{

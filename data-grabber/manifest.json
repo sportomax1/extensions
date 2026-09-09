@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Data Grabber",
+  "version": "1.0.0",
+  "description": "Detect tables and repeated page data, collect rows across load-more/pagination workflows, dedupe, preview, and export.",
+  "permissions": ["storage", "activeTab"],
+  "action": { "default_popup": "popup.html", "default_title": "Data Grabber" },
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["content.js"],
+    "run_at": "document_idle"
+  }]
+}
