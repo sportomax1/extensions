@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Browser Dictation",
+  "version": "1.0.0",
+  "description": "Dictate speech into the last focused text field on almost any webpage.",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_title": "Browser Dictation",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "toggle-dictation": {
+      "suggested_key": {
+        "default": "Alt+Shift+D",
+        "mac": "Command+Shift+D"
+      },
+      "description": "Start or stop dictation"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
