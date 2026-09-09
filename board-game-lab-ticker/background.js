@@ -1,0 +1,5 @@
+const DEFAULTS={baseUrl:"https://board-game-lab-one-phi-42.vercel.app",username:"sportomax",mode:"most",limit:30,visible:true,speed:28,height:78};
+const cache=new Map();
+async function settings(){return {...DEFAULTS,...await chrome.storage.local.get(DEFAULTS)}}
+async function fetchText(url,ttl=10*60*1000){const hit=cache.get(url);if(hit&&Date.now()-hit.t<ttl)return hit.v;const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error(`HTTP ${r.status}`);const v=await r.text();cache.set(url,{t:Date.now(),v});return v;}
+chrome.runtime.onMessage.addListener((m,s,send)=>{if(m?.type==="BGL_COLLECTION"){(async()=>{try{const st=await settings();const u=new URL("/api/bgg-helper",st.baseUrl);u.searchParams.set("endpoint","collection");u.searchParams.set("username",m.username||st.username);u.searchParams.set("own","1");u.searchParams.set("stats","1");u.searchParams.set("subtype","boardgame");send({ok:true,text:await fetchText(u.toString(),m.force?0:10*60*1000)});}catch(e){send({ok:false,error:String(e.message||e)})}})();return true;}});
