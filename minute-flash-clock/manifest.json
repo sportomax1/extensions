@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Minute Flash Clock",
+  "version": "1.1.0",
+  "description": "Flashes the current digital time at the start of every minute with stronger emphasis at 5, 15, 30, and 60-minute marks.",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Minute Flash Clock",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
