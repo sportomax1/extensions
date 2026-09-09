@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Board Game Lab Ticker",
+  "version": "1.0.0",
+  "description": "BGG collection stats and a thumbnail-rich bottom ticker powered by Board Game Lab.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://board-game-lab-one-phi-42.vercel.app/*"],
+  "background": {"service_worker": "background.js"},
+  "action": {"default_popup": "popup.html", "default_title": "Board Game Lab Ticker"},
+  "content_scripts": [{"matches": ["<all_urls>"], "js": ["content.js"], "run_at": "document_idle"}]
+}
