@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dev Buddy</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>🛠 Dev Buddy</h1>
+      <p>Native side-panel controller for the on-page inspector.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Inspector</h2>
+      <p>The full DOM/CSS inspector still runs on the current webpage so element picking and highlighting remain accurate.</p>
+      <button id="toggle" class="primary">Toggle Floating Inspector</button>
+      <button id="reload">Reconnect to Current Tab</button>
+      <div id="status" class="status">Ready.</div>
+    </section>
+
+    <section class="card">
+      <h2>Available in the inspector</h2>
+      <div class="grid">
+        <span>Element + computed CSS</span>
+        <span>Page metadata</span>
+        <span>Local/session storage</span>
+        <span>Links</span>
+        <span>Images</span>
+        <span>Runtime errors</span>
+      </div>
+    </section>
+
+    <section class="card muted-card">
+      <h2>Workflow</h2>
+      <ol>
+        <li>Keep this side panel snapped open.</li>
+        <li>Toggle the floating inspector when you need page-level inspection.</li>
+        <li>Use <b>Inspect</b> in the floating panel to point at DOM elements.</li>
+      </ol>
+    </section>
+  </main>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
