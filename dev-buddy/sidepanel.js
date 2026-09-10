@@ -16,14 +16,10 @@ async function sendToggle() {
   try {
     const tab = await getActiveTab();
     if (!tab?.id) throw new Error('No active tab');
-    if (!/^https?:/i.test(tab.url || '')) {
-      setStatus('Dev Buddy cannot inspect Chrome internal pages.', 'warn');
-      return;
-    }
     await chrome.tabs.sendMessage(tab.id, { type: 'DEV_TOGGLE' });
     setStatus('Toggled inspector on the current page.', 'ok');
   } catch (error) {
-    setStatus('Inspector is not connected. Refresh the webpage, then try again.', 'warn');
+    setStatus('Inspector is unavailable on this tab. Open or refresh a normal webpage, then try again.', 'warn');
   }
 }
 
@@ -31,10 +27,6 @@ async function reconnect() {
   try {
     const tab = await getActiveTab();
     if (!tab?.id) throw new Error('No active tab');
-    if (!/^https?:/i.test(tab.url || '')) {
-      setStatus('Open a normal http/https webpage first.', 'warn');
-      return;
-    }
     await chrome.tabs.reload(tab.id);
     setStatus('Page reloading. Dev Buddy will reconnect automatically.', 'ok');
   } catch (error) {
