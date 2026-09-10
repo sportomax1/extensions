@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Clipboard Buddy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Searchable clipboard and snippet history with pins, tags, manual capture, and save-selection context menus.",
-  "permissions": ["storage", "clipboardRead", "clipboardWrite", "contextMenus"],
+  "permissions": ["storage", "clipboardRead", "clipboardWrite", "contextMenus", "sidePanel"],
   "background": { "service_worker": "background.js" },
-  "action": { "default_popup": "popup.html", "default_title": "Clipboard Buddy" }
+  "action": { "default_popup": "popup.html", "default_title": "Clipboard Buddy" },
+  "side_panel": { "default_path": "popup.html" }
 }
