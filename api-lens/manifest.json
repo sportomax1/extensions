@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
   "name": "API Lens",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Postman-like REST tester plus current-page fetch/XHR/resource sniffer with raw bodies, headers, timing, replay, and cURL export.",
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage", "activeTab", "sidePanel"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "background": { "service_worker": "background.js" },
   "action": { "default_popup": "popup.html", "default_title": "API Lens" },
+  "side_panel": { "default_path": "popup.html" },
   "content_scripts": [
     {"matches":["http://*/*","https://*/*"],"js":["page-sniffer.js"],"run_at":"document_start","world":"MAIN"},
     {"matches":["http://*/*","https://*/*"],"js":["bridge.js"],"run_at":"document_start"}
