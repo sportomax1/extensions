@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SFTP Buddy Browser</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div><h1>⇄ SFTP Buddy</h1><p>BGA Studio + GitHub workspace</p></div>
+  <span id="connBadge" class="badge">Disconnected</span>
+</header>
+<nav>
+  <button class="tab on" data-tab="sftp">SFTP</button>
+  <button class="tab" data-tab="editor">Editor</button>
+  <button class="tab" data-tab="github">GitHub</button>
+  <button class="tab" data-tab="sync">Sync</button>
+</nav>
+<main>
+<section id="tab-sftp" class="panel on">
+  <div class="card">
+    <div class="eyebrow">BGA Studio bridge</div>
+    <div class="fixed-host">1.studio.boardgamearena.com:2022</div>
+    <label>Username<input id="sftpUser" autocomplete="username" placeholder="BGA Studio username"></label>
+    <label>Password<input id="sftpPass" type="password" autocomplete="current-password" placeholder="Stored for this browser session only"></label>
+    <div class="row"><button id="connect" class="primary">Connect</button><button id="disconnect">Disconnect</button></div>
+    <small>Uses the existing HTTPS bridge. Password is kept in Chrome session storage, not persistent storage.</small>
+  </div>
+
+  <div class="toolbar">
+    <button id="up">↑ Up</button><button id="refresh">↻</button>
+    <input id="path" placeholder="Remote path" value="">
+    <button id="go">Go</button>
+  </div>
+  <div class="toolbar">
+    <input id="filter" placeholder="Filter files…">
+    <button id="newFile">+ File</button><button id="newFolder">+ Folder</button>
+    <label class="upload">Upload<input id="upload" type="file" hidden></label>
+  </div>
+  <div id="sftpStatus" class="status">Connect to browse your BGA Studio workspace.</div>
+  <div id="fileList" class="file-list"></div>
+</section>
+
+<section id="tab-editor" class="panel">
+  <div class="editor-head">
+    <div><div class="eyebrow">Remote editor</div><strong id="editPath">No file open</strong></div>
+    <span id="editMeta" class="muted"></span>
+  </div>
+  <textarea id="editor" spellcheck="false" placeholder="Open a remote or GitHub text file…"></textarea>
+  <div class="row wrap">
+    <label class="check"><input id="backupBeforeSave" type="checkbox" checked> Backup before SFTP save</label>
+    <button id="saveSftp" class="primary">Save to SFTP</button>
+    <button id="downloadEditor">Download</button>
+    <button id="copyEditor">Copy</button>
+  </div>
+  <div id="editorStatus" class="status"></div>
+</section>
+
+<section id="tab-github" class="panel">
+  <div class="card">
+    <label>Fine-grained GitHub token<input id="ghToken" type="password" placeholder="Stored for this browser session only"></label>
+    <div class="row"><button id="ghConnect" class="primary">Load Repositories</button><button id="ghForget">Forget Token</button></div>
+  </div>
+  <label>Repository<select id="ghRepo"><option value="">Connect to GitHub first</option></select></label>
+  <div class="toolbar"><button id="ghUp">↑ Up</button><input id="ghPath" placeholder="Repository path"><button id="ghGo">Go</button></div>
+  <div id="ghStatus" class="status"></div>
+  <div id="ghList" class="file-list"></div>
+  <div class="row wrap"><button id="ghSave" class="primary">Commit Editor → GitHub</button><button id="ghDelete" class="danger">Delete Selected GitHub File</button></div>
+</section>
+
+<section id="tab-sync" class="panel">
+  <div class="card">
+    <div class="eyebrow">Selected sources</div>
+    <div class="kv"><b>SFTP</b><span id="syncSftp">None</span></div>
+    <div class="kv"><b>GitHub</b><span id="syncGithub">None</span></div>
+  </div>
+  <label>SFTP destination<input id="syncSftpDest" placeholder="folder/file.ext"></label>
+  <label>GitHub destination<input id="syncGhDest" placeholder="path/file.ext"></label>
+  <label>GitHub commit message<input id="syncMessage" value="Sync from SFTP Buddy Browser"></label>
+  <div class="row wrap">
+    <button id="ghToSftp" class="primary">GitHub → SFTP</button>
+    <button id="sftpToGh" class="primary">SFTP → GitHub</button>
+    <button id="compare">Compare Selected</button>
+  </div>
+  <pre id="diff" class="diff">Select one SFTP file and one GitHub file to compare.</pre>
+  <div id="syncStatus" class="status"></div>
+</section>
+</main>
+<script src="sidepanel.js"></script>
+</body>
+</html>

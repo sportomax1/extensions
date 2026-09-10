@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "SFTP Buddy Browser",
+  "version": "1.0.0",
+  "description": "BGA Studio SFTP workspace in Chrome using the existing HTTPS bridge, with remote file editing, backups, trash, GitHub browsing, and file sync.",
+  "permissions": ["storage", "sidePanel", "downloads", "clipboardWrite"],
+  "host_permissions": [
+    "https://ios-apps-beta.vercel.app/*",
+    "https://api.github.com/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Open SFTP Buddy Browser" },
+  "side_panel": { "default_path": "sidepanel.html" }
+}
