@@ -1,11 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Sprite Sheet Inspector",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Pick webpage images, measure sprite coordinates, overlay grids, copy CSS/JSON, and inspect natural image dimensions.",
-  "permissions": ["activeTab", "contextMenus"],
+  "permissions": ["activeTab", "contextMenus", "sidePanel"],
   "background": { "service_worker": "background.js" },
   "action": { "default_popup": "popup.html", "default_title": "Sprite Sheet Inspector" },
+  "side_panel": { "default_path": "popup.html" },
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
     "js": ["content.js"],
