@@ -1,11 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Dev Buddy",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "F12-like floating inspector for DOM, CSS, page metadata, storage, links, images, and runtime errors.",
-  "permissions": ["storage"],
+  "permissions": ["storage", "sidePanel"],
   "action": { "default_title": "Toggle Dev Buddy" },
   "background": { "service_worker": "background.js" },
+  "side_panel": { "default_path": "sidepanel.html" },
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
     "js": ["content.js"],
