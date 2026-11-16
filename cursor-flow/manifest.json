@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Cursor Flow",
+  "version": "1.0.0",
+  "description": "Gentle, customizable typing effects that follow the text caret on ordinary webpages.",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Cursor Flow settings",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cursor Flow</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="panel">
+    <header class="heading">
+      <div class="logo" aria-hidden="true"><span></span></div>
+      <div>
+        <h1>Cursor Flow</h1>
+        <p>Make every cursor feel a little calmer.</p>
+      </div>
+    </header>
+
+    <label class="enabled control">
+      <span><strong>Enable effects</strong><small>On ordinary webpages and text editors</small></span>
+      <input id="enabled" type="checkbox" data-key="enabled" aria-label="Enable typing effects">
+      <span class="switch" aria-hidden="true"></span>
+    </label>
+
+    <div class="fieldset">
+      <label class="control column" for="theme">
+        <span>Color mood</span>
+        <select id="theme" data-key="theme">
+          <option value="sunset">Warm sunset</option>
+          <option value="ocean">Quiet ocean</option>
+          <option value="lilac">Soft lilac</option>
+          <option value="neutral">Minimal gray</option>
+        </select>
+      </label>
+
+      <label class="control column" for="effect">
+        <span>Focus effect</span>
+        <select id="effect" data-key="effect">
+          <option value="both">Glow + writing line</option>
+          <option value="glow">Glow only</option>
+          <option value="line">Writing line only</option>
+        </select>
+      </label>
+
+      <label class="control checkbox-row">
+        <span><strong>Floating typed letters</strong><small>Subtle, brief animation with each character</small></span>
+        <input id="glyphs" type="checkbox" data-key="glyphs">
+      </label>
+
+      <label class="control column" for="follow">
+        <span>Follow the active line</span>
+        <select id="follow" data-key="follow">
+          <option value="off">Off (safest for forms)</option>
+          <option value="edge">When near screen edges</option>
+          <option value="center">Keep near screen center</option>
+        </select>
+      </label>
+
+      <label class="control column" for="intensity">
+        <span class="slider-head">Effect strength <output id="intensityValue" for="intensity">60%</output></span>
+        <input id="intensity" data-key="intensity" type="range" min="10" max="100" step="5" value="60">
+      </label>
+    </div>
+
+    <div class="preview" aria-hidden="true">
+      <span class="preview-text">A little space to think<span class="cursor"></span></span>
+    </div>
+    <footer>
+      <span id="status">Settings save automatically</span>
+      <span class="privacy">No typing data is saved or sent</span>
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

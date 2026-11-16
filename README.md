@@ -13,6 +13,7 @@ A collection of independent Chrome / Chromium Manifest V3 extensions. Each exten
 | `board-game-lab-ticker/` | **Board Game Lab Ticker** | BoardGameGeek / Board Game Lab collection ticker. |
 | `browser-dictation/` | **Browser Dictation** | Dictate speech into the last focused webpage text field. |
 | `clipboard-buddy/` | **Clipboard Buddy** | Searchable local snippets/clipboard captures with pins, tags, selection capture, and copy/edit/delete. |
+| `cursor-flow/` | **Cursor Flow** | Alhora-style typing glow and caret-follow effects in existing webpage text fields. |
 | `data-grabber/` | **Data Grabber** | Detect page tables/cards/lists, collect/dedupe rows, handle Load/See More workflows, and export CSV/JSON/Markdown. |
 | `dev-buddy/` | **Dev Buddy** | Lightweight on-page developer inspector: elements, computed CSS, DOM/storage/page information, and runtime errors. |
 | `emoji-keys/` | **Emoji Keys 2.0** | A–Z emoji mapping with replacement, particles, confetti, trails, sounds, streaks, and heatmap. |
@@ -166,6 +167,12 @@ Dictates into most normal webpage text fields and `contenteditable` areas. Defau
 - Windows/Linux/ChromeOS: `Alt + Shift + D`
 - macOS: `Command + Shift + D`
 
+## Cursor Flow
+
+Folder: `cursor-flow/`
+
+Subtle focus glow, writing-line highlight, floating typed-letter animations, and optional caret-follow scrolling in standard webpage editors. Multiple color themes and strength settings. No typed text is recorded or sent.
+
 ## Minute Flash Clock
 
 Folder: `minute-flash-clock/`
@@ -214,6 +221,7 @@ extensions/
 ├── board-game-lab-ticker/
 ├── browser-dictation/
 ├── clipboard-buddy/
+├── cursor-flow/
 ├── data-grabber/
 ├── dev-buddy/
 ├── emoji-keys/
